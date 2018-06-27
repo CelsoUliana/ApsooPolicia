@@ -11,11 +11,12 @@ package logica;
  */
 import dados.ControladoraBancoDeDados;
 import dados.Usuario;
+import java.sql.SQLException;
 
 public class ControladoraLogin {
-
-	public Usuario autentica(int login, String senha) {
-		return null;
+        ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
+	public Usuario autentica(String login, String senha) throws SQLException {
+		return banco.getUsuarioQuerry(login, senha);
 	}
 
 }

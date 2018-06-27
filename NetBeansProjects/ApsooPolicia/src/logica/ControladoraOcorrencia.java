@@ -11,11 +11,12 @@ package logica;
  */
 import dados.ControladoraBancoDeDados;
 import dados.Ocorrencia;
+import java.sql.SQLException;
 
 public class ControladoraOcorrencia {
-
-	public Ocorrencia detalharOcorrencia(int codOcorrencia) {
-		return null;
+        ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
+	public Ocorrencia detalharOcorrencia(int codOcorrencia) throws SQLException {
+		return banco.getOcorrenciaQuerry(codOcorrencia);
 	}
 
 }

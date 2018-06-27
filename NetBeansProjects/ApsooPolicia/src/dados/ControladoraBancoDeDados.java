@@ -107,6 +107,35 @@ public class ControladoraBancoDeDados{
         
     }
     
+    public Usuario getUsuarioQuerry(String login, String senha) throws SQLException{
+        
+        Usuario usu = new Usuario();
+        ResultSet answ = null;
+        
+        try{
+            banco.init();
+            answ = banco.getStatement().executeQuery("select * from usuario where login='"+login+"' and senha ='"+senha+"';");
+        
+            //System.out.println("[*] - Aparece "+codOcorrencia+" na tabela ! \ncomando sql: select * from ocorrencia where cod_ocorrencia="+codOcorrencia);
+        }
+        catch(SQLException erro){
+            erro.printStackTrace();
+        }
+        
+        if(answ != null){
+            while(answ.next()){
+                usu.setCidadao(getCidadaoQuerry(answ.getInt(2)));
+                usu.setEhAdmin(answ.getBoolean(5));
+                usu.setLogin(answ.getString(3));
+                usu.setSenha(answ.getString(4));
+            }
+            
+            
+        }
+        banco.destroy();
+        return usu;
+    }
+    
     public Ocorrencia getOcorrenciaQuerry(int codOcorrencia) throws SQLException{
         Ocorrencia oc = new Ocorrencia();
         
