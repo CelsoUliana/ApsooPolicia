@@ -1,3 +1,5 @@
+package ADefinir;
+
 
 import dados.ControladoraBancoDeDados;
 import dados.Ocorrencia;
@@ -18,17 +20,15 @@ import java.util.ArrayList;
 public class teste {
     public static void main(String args[]) throws SQLException {
         ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
-        Ocorrencia a = banco.getOcorrenciaQuerry(1);
+        //Ocorrencia a = banco.getOcorrenciaQuerry(1);
         
         
-        for(Usuario u : a.getEquipe()){
+        /*for(Usuario u : a.getEquipe()){
             System.out.println(u.getLogin());
             System.out.println(u.getSenha());
-        }
+        }  */      
         
-        
-        
-        
-        
+       Usuario user = banco.getUsuarioQuerry(1);
+       System.out.println(user.getLogin());
     }
 }

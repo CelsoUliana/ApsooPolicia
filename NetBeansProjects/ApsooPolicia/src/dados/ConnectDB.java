@@ -31,8 +31,10 @@ public class ConnectDB {
     public void init(){
        
        try{
-        conn = DriverManager.getConnection(
+       conn = DriverManager.getConnection(
                "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10244804", "sql10244804", "CjQRVhg7cu");
+    	//conn = DriverManager.getConnection(
+    		              //"jdbc:mysql://localhost:3306/policia?useTimezone=true&serverTimezone=UTC", "root", "");  
         System.out.println("Conectado !");
         }catch(Exception e){ 
             System.out.println("Falha ao tentar a conexão");
@@ -43,7 +45,7 @@ public class ConnectDB {
            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
        }catch(Exception e){
            System.out.println("Falha no Cursor de Execução");
-           e.printStackTrace();
+           //e.printStackTrace();
        }
        
     }

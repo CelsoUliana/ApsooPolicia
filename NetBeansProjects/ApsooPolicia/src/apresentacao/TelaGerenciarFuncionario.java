@@ -16,13 +16,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import ADefinir.Constants;
-import logica.ControladoraOcorrencia;
-import logica.ControladoraPrincipal;
 
-public class TelaGerenciarOcorrencia extends JFrame {
+public class TelaGerenciarFuncionario extends JFrame {
 	private int x, y;
 
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -32,7 +29,7 @@ public class TelaGerenciarOcorrencia extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaGerenciarOcorrencia frame = new TelaGerenciarOcorrencia();
+					TelaGerenciarFuncionario frame = new TelaGerenciarFuncionario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +41,7 @@ public class TelaGerenciarOcorrencia extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaGerenciarOcorrencia() {
+	public TelaGerenciarFuncionario() {
 		setBounds(100, 100, 809, 482);
 		setUndecorated(true);
 		setOpacity(Constants.OPACITY);	
@@ -186,6 +183,4 @@ public class TelaGerenciarOcorrencia extends JFrame {
 	public void back() {
 		
 	}
-
-
 }
