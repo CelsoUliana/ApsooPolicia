@@ -78,6 +78,21 @@ public class ControladoraBancoDeDados{
         
     }
     
+    public boolean associaPolicial(int codUsuario, int codOcorrencia) throws SQLException{
+        
+        String sql = "insert into ocorrencia_policiais values ("+codOcorrencia+","+codUsuario+");";
+        banco.init();
+        
+        try{
+            banco.getStatement().executeUpdate(sql);
+        }
+        catch (SQLException ex) {
+            // erro
+        }
+        
+        return true;
+    }
+    
     public Usuario getUsuarioQuerry(int codUsuario) throws SQLException{
         
         Usuario usu = new Usuario();
@@ -169,12 +184,47 @@ public class ControladoraBancoDeDados{
                 
                 oc.setDescricao(answ.getString(5));
                 oc.setDescricaoCrime(answ.getString(6));
+                
+                ArrayList<Integer> cods = getEquipePolicial(codOcorrencia);
+                ArrayList<Usuario> policias = new ArrayList<Usuario>();
+                
+                for(Integer i : cods){
+                    Usuario u = getUsuarioQuerry(i);
+                    policias.add(u);
+                }
+                
+                oc.setEquipe(policias);
+                
             }
             
             
         }
         banco.destroy();
         return oc;
+    }
+    
+    public ArrayList<Integer> getEquipePolicial(int codOcorrencia) throws SQLException{
+        
+        ArrayList<Integer> listaCodUsuarios = new ArrayList<Integer>();
+        
+        ResultSet answ = null;
+        try{
+            banco.init();
+            answ = banco.getStatement().executeQuery("select * from ocorrencia_policiais where cod_ocorrencia ="+codOcorrencia+";");
+            //answ = banco.getStatement().executeQuery("SELECT * FROM usuario WHERE 1;");
+        
+            //System.out.println("[*] - Aparece "+codOcorrencia+" na tabela ! \ncomando sql: select * from ocorrencia where cod_ocorrencia="+codOcorrencia);
+        }
+        catch(SQLException erro){
+            erro.printStackTrace();
+        }
+        if(answ != null){
+            while(answ.next()){
+                Integer a = answ.getInt(2);
+                listaCodUsuarios.add(a);
+            }
+        }
+        return listaCodUsuarios;
     }
     
     public ArrayList<Ocorrencia> getAllOcorrenciasQuerry() throws SQLException{

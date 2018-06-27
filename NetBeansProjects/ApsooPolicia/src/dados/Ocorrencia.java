@@ -9,6 +9,7 @@ package dados;
  *
  * @author PCDOMILHAO
  */
+import java.sql.SQLException;
 import java.util.Collection;
 
 public class Ocorrencia {
@@ -30,9 +31,16 @@ public class Ocorrencia {
     public Usuario delegadoResponsavel;
 
     public Collection<Evidencia> evidencias;
-
+    
+    private ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
+    
     public String getDescricao() {
         return descricao;
+    }
+    
+    public boolean associaPolicial(int codUsuario) throws SQLException{
+        return banco.associaPolicial(codUsuario, this.codOcorrencia);
+       
     }
 
     public void setDescricao(String descricao) {

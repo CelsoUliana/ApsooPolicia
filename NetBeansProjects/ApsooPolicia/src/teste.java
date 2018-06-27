@@ -1,6 +1,7 @@
 
 import dados.ControladoraBancoDeDados;
 import dados.Ocorrencia;
+import dados.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,14 +18,17 @@ import java.util.ArrayList;
 public class teste {
     public static void main(String args[]) throws SQLException {
         ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
-        ArrayList<Ocorrencia> a = banco.getAllOcorrenciasQuerry();
+        Ocorrencia a = banco.getOcorrenciaQuerry(1);
         
-        for(Ocorrencia oc : a){
-            System.out.println(oc.getDescricao());
-            System.out.println(oc.getCidadaoDenuncia().getCpf());
-            System.out.println(oc.getDelegacia().getNome());
-            System.out.println(oc.getDelegadoResponsavel().getLogin());
+        
+        for(Usuario u : a.getEquipe()){
+            System.out.println(u.getLogin());
+            System.out.println(u.getSenha());
         }
+        
+        
+        
+        
         
     }
 }

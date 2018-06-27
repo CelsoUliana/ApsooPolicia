@@ -11,6 +11,7 @@ package logica;
  */
 import dados.ControladoraBancoDeDados;
 import dados.Ocorrencia;
+import dados.Usuario;
 import java.sql.SQLException;
 
 public class ControladoraOcorrencia {
