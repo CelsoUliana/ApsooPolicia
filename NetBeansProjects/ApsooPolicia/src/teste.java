@@ -2,6 +2,7 @@
 import dados.ControladoraBancoDeDados;
 import dados.Ocorrencia;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,16 +16,15 @@ import java.sql.SQLException;
  */
 public class teste {
     public static void main(String args[]) throws SQLException {
-        Ocorrencia a = new Ocorrencia();
         ControladoraBancoDeDados banco = new ControladoraBancoDeDados();
+        ArrayList<Ocorrencia> a = banco.getAllOcorrenciasQuerry();
         
-        a = banco.getOcorrenciaQuerry(1);
-        
-        System.out.println(a.getDescricao());
-        System.out.println(a.getCidadaoDenuncia().getCpf());
-        System.out.println(a.getDelegacia().getNome());
-        System.out.println(a.getDelegadoResponsavel().getLogin());
-        
+        for(Ocorrencia oc : a){
+            System.out.println(oc.getDescricao());
+            System.out.println(oc.getCidadaoDenuncia().getCpf());
+            System.out.println(oc.getDelegacia().getNome());
+            System.out.println(oc.getDelegadoResponsavel().getLogin());
+        }
         
     }
 }

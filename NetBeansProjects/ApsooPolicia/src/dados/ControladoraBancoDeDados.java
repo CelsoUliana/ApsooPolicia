@@ -6,8 +6,8 @@
 package dados;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -145,7 +145,7 @@ public class ControladoraBancoDeDados{
             answ = banco.getStatement().executeQuery("select * from ocorrencia where cod_ocorrencia="+codOcorrencia+";");
             //answ = banco.getStatement().executeQuery("SELECT * FROM usuario WHERE 1;");
         
-            System.out.println("[*] - Aparece "+codOcorrencia+" na tabela ! \ncomando sql: select * from ocorrencia where cod_ocorrencia="+codOcorrencia);
+            //System.out.println("[*] - Aparece "+codOcorrencia+" na tabela ! \ncomando sql: select * from ocorrencia where cod_ocorrencia="+codOcorrencia);
         }
         catch(SQLException erro){
             erro.printStackTrace();
@@ -175,6 +175,50 @@ public class ControladoraBancoDeDados{
         }
         banco.destroy();
         return oc;
+    }
+    
+    public ArrayList<Ocorrencia> getAllOcorrenciasQuerry() throws SQLException{
+        ArrayList<Ocorrencia> listOc = new ArrayList<Ocorrencia>();
+        
+        ResultSet answ = null;
+        try{
+            banco.init();
+            answ = banco.getStatement().executeQuery("select * from ocorrencia;");
+            //answ = banco.getStatement().executeQuery("SELECT * FROM usuario WHERE 1;");
+        
+            //System.out.println("[*] - Aparece "+codOcorrencia+" na tabela ! \ncomando sql: select * from ocorrencia where cod_ocorrencia="+codOcorrencia);
+        }
+        catch(SQLException erro){
+            erro.printStackTrace();
+        }
+        
+        
+        if(answ != null){
+            while(answ.next()){
+                Ocorrencia oc = new Ocorrencia();
+                oc.setCodOcorrencia(answ.getInt(1));
+                
+                Delegacia de;             
+                de = getDelegaciaQuerry(answ.getInt(2));
+                oc.setDelegacia(de);
+                
+                Usuario usu;
+                usu = getUsuarioQuerry(answ.getInt(3));
+                oc.setDelegadoResponsavel(usu);
+                
+                Cidadao cid;
+                cid = getCidadaoQuerry(answ.getInt(4));
+                oc.setCidadaoDenuncia(cid);
+                
+                oc.setDescricao(answ.getString(5));
+                oc.setDescricaoCrime(answ.getString(6));
+                listOc.add(oc);
+            }
+            
+            
+        }
+        banco.destroy();
+        return listOc;
     }
 }
      
